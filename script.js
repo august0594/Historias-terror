@@ -173,16 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     function obtenerHistoriasParaMostrar() {
-        const historiasAleatorias = [];
-        const indicesUsados = new Set();
-        while (historiasAleatorias.length < 3 && historiasAleatorias.length < historiasBase.length) {
-            const randomIndex = Math.floor(Math.random() * historiasBase.length);
-            if (!indicesUsados.has(randomIndex)) {
-                historiasAleatorias.push(historiasBase[randomIndex]);
-                indicesUsados.add(randomIndex);
-            }
-        }
-        return historiasAleatorias;
+        // Devuelve una copia de todo el array de historiasBase para mostrarlas todas.
+        return [...historiasBase];
     }
 
     function mostrarHistorias() {
@@ -507,4 +499,3 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarHistorias(); // Carga las tarjetas de historias al inicio
     playBackgroundMusic(); // Inicia la música de fondo
 });
-
