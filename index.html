@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -39,16 +38,15 @@
             <h2>¿Te gustaron las historias?</h2>
             <p>Considera apoyar el miedo con un café o una donación.</p>
             <div class="apoyo-buttons">
-                <!-- Botón de Buy Me a Coffee -->
                 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="august05" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
-                <!-- Botón de Apóyame con Plin QR -->
                 <button id="mostrar-qr-plin" class="support-button"><i class="fas fa-qrcode"></i> Apóyame (Plin QR)</button>
             </div>
         </section>
 
         <section id="contenido-historia" class="oculto">
             <h2 id="titulo-historia"></h2>
-            <p id="texto-historia"></p>            <button id="leer-historia">Leer Historia</button>
+            <p id="texto-historia"></p>
+            <button id="leer-historia">Leer Historia</button>
             <button id="volver-menu">Volver al Menú</button>
         </section>
     </main>
@@ -57,18 +55,9 @@
         <p>&copy; 2023 Noches de Terror</p>
     </footer>
 
-    <!-- Modal para el QR de Plin -->
-    <div id="qr-modal" class="modal oculto">
-        <div class="modal-contenido">
-            <span class="cerrar-modal">&times;</span>
-            <h3>Apóyanos con un Plin</h3>
-            <p>Escanea el código QR para hacer una donación.</p>
-            <img src="plin-qr.png" alt="Código QR de Plin" class="qr-imagen">
-            <p class="qr-nombre">Roman Valverde</p>
-        </div>
-    </div>
-
-    <script src="particles.min.js"></script> <!-- Script de partículas -->
+    <script src="particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
+
+
