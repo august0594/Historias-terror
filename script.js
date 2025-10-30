@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOMContentloaded: El DOM ha sido cargado.");
+
     const menuHistorias = document.getElementById('menu-historias');
     const historiasGrid = document.querySelector('.historias-grid');
     const contenidoHistoria = document.getElementById('contenido-historia');
@@ -52,17 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Música y Sonidos ---
     function playBackgroundMusic() {
-        // Solo intentar reproducir si la música está pausada o no se está reproduciendo
+        console.log("Intentando reproducir música de fondo...");
         if (backgroundMusic.paused || !isMusicPlaying) {
             backgroundMusic.volume = BGM_VOLUME;
             backgroundMusic.play().then(() => {
                 isMusicPlaying = true;
                 toggleMusicIcon.classList.remove('fa-volume-mute');
                 toggleMusicIcon.classList.add('fa-volume-up');
+                console.log("Música de fondo reproducida con éxito.");
             }).catch(error => {
                 console.warn("Autoplay de música bloqueado o error al reproducir:", error);
-                // Si el autoplay es bloqueado, la música no estará sonando,
-                // así que el icono debe reflejar eso.
                 isMusicPlaying = false;
                 toggleMusicIcon.classList.remove('fa-volume-up');
                 toggleMusicIcon.classList.add('fa-volume-mute');
@@ -71,22 +72,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function toggleBackgroundMusic() {
+        console.log("Alternando música de fondo.");
         if (backgroundMusic.paused) {
-            playBackgroundMusic(); // Intenta reproducir si está pausada
+            playBackgroundMusic();
         } else {
             backgroundMusic.pause();
             isMusicPlaying = false;
             toggleMusicIcon.classList.remove('fa-volume-up');
             toggleMusicIcon.classList.add('fa-volume-mute');
+            console.log("Música de fondo pausada.");
         }
     }
 
     function lowerBackgroundMusicVolume() {
-        if (isMusicPlaying) backgroundMusic.volume = BGM_VOLUME_QUIET;
+        if (isMusicPlaying) {
+            backgroundMusic.volume = BGM_VOLUME_QUIET;
+            console.log("Volumen de música bajado.");
+        }
     }
 
     function restoreBackgroundMusicVolume() {
-        if (isMusicPlaying) backgroundMusic.volume = BGM_VOLUME;
+        if (isMusicPlaying) {
+            backgroundMusic.volume = BGM_VOLUME;
+            console.log("Volumen de música restaurado.");
+        }
     }
 
     function playCardClickSound() {
@@ -96,8 +105,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Historias ---
     function mostrarHistorias() {
+        console.log("Ejecutando mostrarHistorias().");
         historiasGrid.innerHTML = '';
-        const historiasMostradas = historiasBase;
+        const historiasMostradas = historiasBase; // Muestra todas las historias base
+        if (historiasMostradas.length === 0) {
+            console.warn("No hay historias en historiasBase para mostrar.");
+            historiasGrid.innerHTML = '<p style="color:red;">Error: No se pudieron cargar las historias.</p>';
+            return;
+        }
+
         historiasMostradas.forEach(historia => {
             const card = document.createElement('div');
             card.classList.add('historia-card');
@@ -107,10 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 mostrarContenidoHistoria(historia);
             });
             historiasGrid.appendChild(card);
+            console.log(`Historia '${historia.titulo}' añadida al DOM.`);
         });
     }
 
     function mostrarContenidoHistoria(historia) {
+        console.log(`Mostrando contenido de la historia: ${historia.titulo}`);
         menuHistorias.classList.add('oculto');
         document.getElementById('apoyanos').classList.add('oculto');
         contenidoHistoria.classList.remove('oculto');
@@ -125,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function volverAlMenu() {
+        console.log("Volviendo al menú principal.");
         menuHistorias.classList.remove('oculto');
         document.getElementById('apoyanos').classList.remove('oculto');
         contenidoHistoria.classList.add('oculto');
@@ -135,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function toggleHistoriaSpeech() {
+        console.log("Alternando narración de historia.");
         if (!synthesis) { alert('Tu navegador no soporta la lectura de texto.'); return; }
 
         if (isSpeaking) {
@@ -142,12 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
             isSpeaking = false;
             toggleSpeechBtn.innerHTML = '<i class="fas fa-play"></i> Reanudar';
             restoreBackgroundMusicVolume();
+            console.log("Narración pausada.");
         } else {
             if (synthesis.paused) {
                 synthesis.resume();
                 isSpeaking = true;
                 toggleSpeechBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar';
                 lowerBackgroundMusicVolume();
+                console.log("Narración reanudada.");
             } else {
                 synthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(currentStoryText);
@@ -158,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     restoreBackgroundMusicVolume();
                     isSpeaking = false;
                     toggleSpeechBtn.innerHTML = '<i class="fas fa-play"></i> Leer Historia';
+                    console.log("Narración finalizada.");
                 };
                 utterance.onerror = (event) => {
                     console.error("Error en SpeechSynthesisUtterance:", event);
@@ -169,12 +192,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 isSpeaking = true;
                 toggleSpeechBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar';
                 lowerBackgroundMusicVolume();
+                console.log("Narración iniciada.");
             }
         }
     }
 
     // --- Modal QR que desaparece ---
     function abrirModalQR() {
+        console.log("Abriendo modal QR.");
         const modal = document.createElement('div');
         modal.className = 'modal';
         modal.innerHTML = `
@@ -191,15 +216,16 @@ document.addEventListener('DOMContentLoaded', () => {
         qrOpenSound.currentTime = 0;
         qrOpenSound.play().catch(e => console.warn("Error al reproducir sonido de QR:", e));
 
-        modal.querySelector('.cerrar-modal').addEventListener('click', () => modal.remove());
-        modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+        modal.querySelector('.cerrar-modal').addEventListener('click', () => { modal.remove(); console.log("Modal QR cerrado."); });
+        modal.addEventListener('click', (e) => { if (e.target === modal) { modal.remove(); console.log("Modal QR cerrado (clic fuera)."); } });
     }
 
     mostrarQrPlinBtn.addEventListener('click', abrirModalQR);
 
     // --- Particles.js ---
-    // Asegúrate de que particles.min.js esté en la misma carpeta
-    if (typeof particlesJS !== 'undefined') {
+    // Verificar si particlesJS está definido antes de intentar inicializarlo
+    if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
+        console.log("Inicializando particlesJS.");
         particlesJS('particles-js', {
             "particles": { "number": {"value":50,"density":{"enable":true,"value_area":800}},
             "color":{"value":"#b22222"},
@@ -212,17 +238,17 @@ document.addEventListener('DOMContentLoaded', () => {
             "retina_detect": true
         });
     } else {
-        console.warn("particles.min.js no se cargó o no está disponible.");
+        console.warn("particlesJS no se cargó correctamente o el elemento 'particles-js' no existe.");
     }
 
 
     // --- Event Listeners ---
-    volverMenuBtn.addEventListener('click', volverAlMenu);
-    toggleSpeechBtn.addEventListener('click', toggleHistoriaSpeech);
-    toggleMusicBtn.addEventListener('click', toggleBackgroundMusic);
+    if (volverMenuBtn) volverMenuBtn.addEventListener('click', volverAlMenu);
+    if (toggleSpeechBtn) toggleSpeechBtn.addEventListener('click', toggleHistoriaSpeech);
+    if (toggleMusicBtn) toggleMusicBtn.addEventListener('click', toggleBackgroundMusic);
+    if (mostrarQrPlinBtn) mostrarQrPlinBtn.addEventListener('click', abrirModalQR);
 
     // --- Inicialización ---
-    mostrarHistorias(); // Muestra todas las historias al cargar
-    playBackgroundMusic(); // Asegura que la música de fondo se intente reproducir al inicio
+    mostrarHistorias(); // Esto debería cargar las historias en el grid
+    playBackgroundMusic(); // Intenta reproducir la música de fondo
 });
-
