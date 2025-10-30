@@ -164,6 +164,21 @@ button:hover {
     font-size: 1.1em;
 }
 
+/* Contenedor de botones para la sección de historia */
+.story-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Asegura que los botones se envuelvan en pantallas pequeñas */
+    gap: 15px; /* Espacio entre los botones */
+    margin-top: 20px; /* Margen superior para separarlos del texto */
+}
+
+/* Estilo para los botones dentro de story-controls para anular el margen global si es necesario */
+.story-controls button {
+    margin: 0; /* Anula el margen global para el espaciado de gap */
+}
+
+
 .oculto {
     display: none;
 }
@@ -378,6 +393,14 @@ footer {
         width: 90%;
         padding: 20px;
     }
+    /* Ajustes para los botones de historia en móvil */
+    .story-controls {
+        flex-direction: column; /* Apilarlos verticalmente */
+        gap: 10px;
+    }
+    .story-controls button {
+        width: 100%; /* Ocupar el ancho completo */
+    }
 }
 
 @media (max-width: 480px) {
@@ -391,3 +414,4 @@ footer {
         font-size: 1em;
     }
 }
+
