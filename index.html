@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historias de Terror de Halloween</title>
+    <title>Disfruta Halloween</title> <!-- Título de la web actualizado -->
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,11 +23,16 @@
     </div>
 
     <header>
-        <h1>Historias de Halloween</h1>
+        <h1>DISFRUTA HALLOWEEN</h1> <!-- Título principal actualizado -->
+        <nav>
+            <button class="nav-button" data-target="menu-historias">Historias de Halloween</button>
+            <button class="nav-button" data-target="carta-astral-section">Carta Astral</button>
+            <button class="nav-button" data-target="verdad-reto-section">Verdad o Reto</button>
+        </nav>
     </header>
 
     <main>
-        <section id="menu-historias">
+        <section id="menu-historias" class="current-section"> <!-- Marcamos esta como la sección inicial -->
             <h2>Elige tu Pesadilla...</h2>
             <div class="historias-grid">
                 <!-- Las tarjetas de historia generadas por JS se insertarán aquí -->
@@ -35,13 +40,33 @@
             <!-- Botón "Generar Nuevas Historias" ha sido eliminado -->
         </section>
 
-        <section id="apoyanos">
-            <h2>¿Te gustaron las historias?</h2>
-            <p>Considera apoyar el miedo con un café o una donación.</p>
-            <div class="apoyo-buttons">
-                <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="august05" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
-                <button id="mostrar-qr-plin" class="support-button"><i class="fas fa-qrcode"></i> Apóyame (Plin QR)</button>
+        <section id="carta-astral-section" class="oculto">
+            <h2>Tu Carta Astral de Halloween</h2>
+            <div id="astral-quiz">
+                <!-- Preguntas de carta astral se cargarán aquí -->
             </div>
+            <div id="astral-result" class="oculto">
+                <h3>El Velo de tu Destino se Revela...</h3>
+                <p id="astral-description"></p>
+                <div id="astral-image-container"></div>
+            </div>
+            <button id="start-astral-quiz" class="astral-quiz-button">Comenzar</button>
+            <button id="next-astral-question" class="oculto astral-quiz-button">Siguiente Pregunta</button>
+            <button id="show-astral-result" class="oculto astral-quiz-button">Ver Mi Carta Astral</button>
+            <button class="volver-general"><i class="fas fa-arrow-left"></i> Volver al Menú Principal</button>
+        </section>
+
+        <section id="verdad-reto-section" class="oculto">
+            <h2>Verdad o Reto</h2>
+            <div id="verdad-reto-content">
+                <p id="vr-question">Presiona "Verdad" o "Reto" para empezar...</p>
+            </div>
+            <div class="vr-buttons">
+                <button id="get-verdad" class="vr-button">Verdad</button>
+                <button id="get-reto" class="vr-button">Reto</button>
+            </div>
+            <button id="new-vr" class="oculto vr-button">Nueva Pregunta/Reto</button>
+            <button class="volver-general"><i class="fas fa-arrow-left"></i> Volver al Menú Principal</button>
         </section>
 
         <section id="contenido-historia" class="oculto">
@@ -51,6 +76,15 @@
             <div class="story-controls">
                 <button id="volver-menu"><i class="fas fa-arrow-left"></i> Volver al Menú</button>
                 <button id="toggle-speech"><i class="fas fa-play"></i> Leer Historia</button>
+            </div>
+        </section>
+
+        <section id="apoyanos">
+            <h2>¿Te gustaron las historias?</h2>
+            <p>Considera apoyar el miedo con un café o una donación.</p>
+            <div class="apoyo-buttons">
+                <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="august05" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+                <button id="mostrar-qr-plin" class="support-button"><i class="fas fa-qrcode"></i> Apóyame (Plin QR)</button>
             </div>
         </section>
     </main>
@@ -64,6 +98,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
