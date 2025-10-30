@@ -13,6 +13,7 @@
 <body>
     <div id="particles-js"></div> <!-- Contenedor para partículas -->
 
+    <!-- Archivos de Audio: Asegúrate de que estos nombres coincidan con tus archivos -->
     <audio id="background-music" loop src="creepy-background-music.mp3"></audio>
     <audio id="card-click-sound" src="whoosh.mp3"></audio>
     <audio id="qr-open-sound" src="chime.mp3"></audio>
@@ -31,7 +32,7 @@
             <div class="historias-grid">
                 <!-- Las tarjetas de historia generadas por JS se insertarán aquí -->
             </div>
-            <button id="generar-nueva-historia">Generar Nuevas Historias</button>
+            <!-- Botón "Generar Nuevas Historias" ha sido eliminado -->
         </section>
 
         <section id="apoyanos">
@@ -46,8 +47,11 @@
         <section id="contenido-historia" class="oculto">
             <h2 id="titulo-historia"></h2>
             <p id="texto-historia"></p>
-            <button id="leer-historia">Leer Historia</button>
-            <button id="volver-menu">Volver al Menú</button>
+            <!-- Botones de control de historia y regresar al menú -->
+            <div class="story-controls">
+                <button id="volver-menu"><i class="fas fa-arrow-left"></i> Volver al Menú</button>
+                <button id="toggle-speech"><i class="fas fa-play"></i> Leer Historia</button>
+            </div>
         </section>
     </main>
 
@@ -55,9 +59,11 @@
         <p>&copy; 2023 Noches de Terror</p>
     </footer>
 
+    <!-- Scripts externos -->
     <script src="particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
