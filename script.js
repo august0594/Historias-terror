@@ -18,6 +18,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleMusicBtn = document.getElementById('toggle-music');
     const toggleMusicIcon = toggleMusicBtn ? toggleMusicBtn.querySelector('i') : null;
     const cardClickSound = document.getElementById('card-click-sound');
+    const enterSiteBtn = document.getElementById('enter-site-btn');
+    const portadaInicial = document.getElementById('portada-inicial');
+    const header = document.querySelector('header');
+    const footer = document.querySelector('footer');
+    const musicControl = document.getElementById('music-control');
+
+    if (enterSiteBtn) {
+        enterSiteBtn.addEventListener('click', () => {
+        // Ocultar portada y mostrar header/footer/controls
+        if (portadaInicial) portadaInicial.classList.add('oculto');
+        if (header) header.classList.remove('oculto');
+        if (footer) footer.classList.remove('oculto');
+        if (musicControl) musicControl.classList.remove('oculto');
+
+        // Mostrar la sección principal (menu-historias)
+        if (typeof showSection === 'function') {
+            showSection('menu-historias');
+        } else {
+            // fallback: manipulación directa si showSection aún no está definida
+            const menu = document.getElementById('menu-historias');
+            if (menu) {
+                document.querySelectorAll('main section').forEach(s => s.classList.add('oculto'));
+                menu.classList.remove('oculto');
+        // Iniciar música (si existe) y cargar historias
+        try {
+            if (typeof playBackgroundMusic === 'function') {
+                playBackgroundMusic();
+            } else if (backgroundMusic) {
+                backgroundMusic.volume = 0.2;
+                backgroundMusic.play().catch(()=>{/*ignore*/});
+            }
+            if (typeof mostrarHistorias === 'function') mostrarHistorias();
+        } catch (e) {
+            console.warn("Error al intentar iniciar música o cargar historias:", e);
+        }
+    });
+} else {
+    console.warn("Botón ENTRAR no encontrado en el DOM (id='enter-site-btn').");
 
     // Carta Astral
     const cartaAstralSection = document.getElementById('carta-astral-section');
@@ -541,3 +579,4 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarHistorias(); // Carga las tarjetas de historias al inicio
     playBackgroundMusic(); // Inicia la música de fondo
 });
+
