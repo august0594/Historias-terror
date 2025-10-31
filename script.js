@@ -405,29 +405,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Lógica de Verdad o Reto ---
     const verdades = [
-        "¿Cuál es el miedo más irracional que tienes?",
-        "¿Alguna vez has mentido para evitar problemas graves? ¿Sobre qué?",
-        "¿Qué es lo más vergonzoso que te ha pasado en público?",
-        "Si pudieras cambiar una cosa de tu pasado, ¿cuál sería y por qué?",
-        "¿Cuál es tu mayor secreto que nadie conoce?",
-        "¿Qué es lo más travieso que hiciste de niño y nadie descubrió?",
-        "¿Crees en fantasmas? ¿Por qué sí o por qué no?",
-        "Si tuvieras un superpoder por un día, ¿cuál elegirías y qué harías?",
-        "¿Qué es lo que más te molesta de la gente?",
-        "¿Alguna vez te has enamorado de alguien que no debías?",
+        "¿Cuál fue la mentira más grande que has dicho sin que te descubran?",
+        "¿Con quién te gustaría quedar atrapado/a en un ascensor?",
+        "¿Cuál ha sido tu momento más vergonzoso frente a alguien que te gusta?",
+        "¿Has stalkeado a tu ex últimamente?",
+        "¿Qué es lo más loco que has hecho por amor o deseo?",
+        "¿Cuál fue tu primera impresión de la persona a tu lado?",
+        "Si pudieras borrar un recuerdo, ¿cuál sería?",
+        "¿Qué cosa te da más morbo?",
+        "¿A quién besarías de este grupo?",
+        "¿Cuál ha sido tu sueño más extraño o picante?",
+        "¿Qué es lo más infantil que aún haces en secreto?",
+        "¿Cuál es tu fantasía más loca?",
+        "¿Has enviado una foto comprometedora alguna vez?",
+        "¿Qué cosa no soportas en una cita?",
+        "¿A quién no invitarías nunca a salir?",
+        "¿Qué es lo más atrevido que has hecho en público?",
+        "¿Con quién del grupo tendrías una cita de una noche?",
+        "¿Qué parte de tu cuerpo te gusta más?",
+        "¿Cuál ha sido tu peor beso?",
+        "¿A quién le confesarías algo esta noche si tuvieras que hacerlo?"
+        "¿Has tenido pensamientos subidos de tono con alguien aquí?",
+        "¿Cuál fue tu primera experiencia sexual?",
+        "¿Te han atrapado haciendo algo indebido?",
+        "¿Cuál es tu posición favorita?",
+        "¿Qué es lo más raro que te han pedido en la cama?",
+        "¿Con quién de aquí te imaginas una noche loca?",
+        "¿Qué prefieres: hacerlo en silencio o con ruido?",
+        "¿Cuál es tu punto débil?",
+        "¿Has tenido un amor prohibido?",
+        "¿Qué es lo más atrevido que has hecho con alguien?",
+        "¿Has fingido alguna vez placer?",
+        "¿Cuántas veces lo has hecho en un mismo día?",
+        "¿Te gusta dominar o ser dominado/a?",
+        "¿Cuál fue tu peor experiencia íntima?",
+        "¿Qué canción te pone en modo 'romance'?"
     ];
 
     const retos = [
-        "Haz un baile espeluznante durante 30 segundos.",
-        "Imita a tu personaje de película de terror favorito.",
-        "Canta una canción de cuna con voz de monstruo.",
-        "Envía un mensaje de texto a alguien y dile 'La luna me susurró tu nombre' sin más explicaciones.",
-        "Cuenta una mini historia de terror improvisada en 30 segundos.",
-        "Permite que el siguiente jugador te ponga un 'tatuaje' de maquillaje aterrador.",
-        "Habla con voz de robot durante tus próximas 3 intervenciones.",
-        "Intenta asustar a alguien (de forma segura y sin gritar) y grábalo.",
-        "Come algo inusual (si hay algo disponible y es seguro, ej: una cucharada de mostaza).",
-        "Haz 10 sentadillas mientras haces ruidos de fantasma.",
+        "Canta el estribillo de tu canción favorita como si estuvieras en un concierto.",
+        "Imita a alguien del grupo durante 1 minuto.",
+        "Habla con acento argentino hasta tu siguiente turno.",
+        "Cuenta un chiste malo y ríete de tu propio chiste.",
+        "Deja que alguien te cambie el nombre en el grupo por el resto del juego.",
+        "Graba un audio diciendo algo ridículo y mándalo a un amigo.",
+        "Publica una historia en tus redes con un emoji al azar sin explicación.",
+        "Haz 10 sentadillas mientras dices un piropo en cada una.",
+        "Muestra la última foto que tienes en tu galería.",
+        "Di una frase de amor mirando a alguien del grupo.",
+        "Baila sin música durante 30 segundos.",
+        "Deja que alguien revise tus emojis recientes.",
+        "Léele un mensaje antiguo a alguien del grupo."
+          "Envía un emoji 🔥 a tu contacto más reciente.",
+        "Dale un beso en la mejilla a la persona que el grupo elija.",
+        "Deja que alguien escriba una frase coqueta en tu estado.",
+        "Mira fijamente a alguien durante 20 segundos sin reírte.",
+        "Haz un cumplido con tono sexy a quien tengas al frente.",
+        "Cuenta un secreto íntimo en voz baja al oído de alguien.",
+        "Describe cómo sería tu cita ideal con alguien de aquí.",
+        "Da un abrazo “de película” a alguien.",
+        "Di el nombre de alguien con quien te gustaría dormir una noche.",
+        "Simula que estás coqueteando con alguien del grupo durante 15 segundos.",
+        "Envía un audio diciendo “te extraño” a alguien aleatorio.",
+        "Muestra tu historial de búsqueda por 5 segundos.",
+        "Envía un mensaje de “me gustas” a un contacto al azar (real o falso).",
+        "Deja que alguien te cambie la foto de perfil por 1 hora."
     ];
 
     let usedVerdades = new Set();
@@ -499,3 +541,4 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarHistorias(); // Carga las tarjetas de historias al inicio
     playBackgroundMusic(); // Inicia la música de fondo
 });
+
