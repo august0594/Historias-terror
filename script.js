@@ -3,14 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const navButtons = document.querySelectorAll('.nav-button');
     const volverGeneralButtons = document.querySelectorAll('.volver-general');
 
-    // Elementos de la portada inicial
-    const portadaInicialSection = document.getElementById('portada-inicial');
-    const enterSiteBtn = document.getElementById('enter-site-btn');
-    const header = document.querySelector('header');
-    const footer = document.querySelector('footer');
-    const musicControl = document.getElementById('music-control');
-
-
     const menuHistorias = document.getElementById('menu-historias');
     const historiasGrid = document.querySelector('.historias-grid');
     const contenidoHistoria = document.getElementById('contenido-historia');
@@ -44,8 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const getRetoBtn = document.getElementById('get-reto');
     const newVrBtn = document.getElementById('new-vr');
 
-    const apoyanosSection = document.getElementById('apoyanos'); // Referencia a la sección Apóyanos
-
     let currentStoryText = '';
     const synthesis = window.speechSynthesis;
     let isMusicPlaying = false;
@@ -58,13 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             section.classList.add('oculto');
         });
         document.getElementById(targetId).classList.remove('oculto');
-        
-        // La sección "Apóyanos" siempre visible cuando no estamos en una historia individual o en la portada
-        if (targetId !== 'contenido-historia' && targetId !== 'portada-inicial') {
-            apoyanosSection.classList.remove('oculto');
-        } else {
-            apoyanosSection.classList.add('oculto');
-        }
+        document.getElementById('apoyanos').classList.remove('oculto'); // Apóyanos siempre visible
 
         // Detener TTS si cambiamos de sección
         if (synthesis.speaking) {
@@ -137,43 +121,60 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Historias (Mantiene la lógica existente) ---
     const historiasBase = [
         {
-            titulo: "El reflejo que no era mío",
-            sinopsis: "Una sombra repite los gestos de Lucía en el espejo...",
-            historia: "Esa noche el espejo del baño comenzó a empañarse solo, mientras Lucía se cepillaba los dientes. Al principio no le dio importancia, pensando que era el vapor de la ducha de su hermana, aunque nadie se había duchado. Pero cuando intentó limpiar el cristal, notó que su reflejo no la copiaba exactamente. Había un ligero desfase, como un eco visual. Los ojos de su doble en el espejo parecían más oscuros, y una sonrisa lúgubre se extendió por su rostro antes de que Lucía pudiera reaccionar. El espejo se hizo completamente opaco un instante y al volver a aclararse, su reflejo había desaparecido. Solo quedaba el de la pared detrás de ella. Se giró lentamente, la piel de gallina, y vio su reflejo oscuro mirándola fijamente desde la sombra del pasillo."
+            titulo: "CURVAS ESCALOFRIANTES",
+            sinopsis: "Un camionero se detiene por una autoestopista que le advierte sobre una curva peligrosa, pero ella tiene un secreto helado.",
+            historia: "Un camionero veterano conduce por una carretera de montaña a altas horas de la noche. Cerca de una curva peligrosa, ve a una joven vestida de blanco haciendo autostop. Se detiene y ella sube. Le pide que reduzca la velocidad en la siguiente curva, advirtiéndole que es muy cerrada. El hombre obedece y se salva de un accidente. Aliviado, le agradece por el aviso. Ella le responde con una voz cortante y fría: 'No me lo agradezcas. Es mi misión. Me maté en esa misma curva hace veinticinco años, una noche como esta.' Cuando él gira la vista hacia el copiloto, el asiento está vacío, pero totalmente mojado."
         },
         {
-            titulo: "La llamada de las 3:17",
-            sinopsis: "Marco recibe una llamada misteriosa a las 3:17 a.m....",
-            historia: "Marco se despertó con el celular vibrando, la pantalla iluminando el cuarto oscuro. Eran las 3:17 a.m., y el número era desconocido. Dudó un instante, pero la curiosidad pudo más. Contestó con un '¿Hola?' apenas audible. Al otro lado, solo silencio. No un silencio de línea muerta, sino uno denso, pesado, como si algo estuviera conteniendo la respiración. Estuvo a punto de colgar cuando una voz, apenas un susurro rasposo, pronunció su nombre. 'Marco... te estoy esperando.' El pánico se apoderó de él. Colgó y bloqueó el número, pero el teléfono volvió a sonar un instante después, con el mismo número. Y así, cada noche a las 3:17 a.m., el teléfono sonaba, y la voz lo llamaba, más cerca cada vez."
+            titulo: "CUMPLE TU PROMESA",
+            sinopsis: "Andrés prometió nunca dejar sola a Lucía. Incluso después de la muerte, sigue cumpliendo su promesa de formas aterradoras.",
+            historia: "Andrés le prometió a Lucía que nunca la dejaría sola, ni siquiera después de la muerte. Un accidente de auto lo arrancó de su vida, pero la promesa siguió cumpliéndose. Cada mañana, Lucía encontraba el cepillo de dientes de Andrés húmedo, el control remoto en su lado del sofá y marcas recientes en la almohada junto a la suya. Una noche, harta, gritó al aire: —¡Déjame en paz! El televisor se encendió solo. En la pantalla, reflejada en la oscuridad, la cara de Andrés sonreía desde atrás."
         },
         {
-            titulo: "No apagues el proyector",
-            sinopsis: "Andrés ignora una advertencia y proyecta una película antigua...",
-            historia: "Andrés trabajaba en una tienda de empeños, y un día llegó un proyector de cine antiguo con unas bobinas de película sin identificar. Una nota gastada advertía: 'No apagues el proyector una vez iniciado.' Ignorando la superstición, Andrés lo llevó a un viejo cine abandonado que solía visitar. Conectó el proyector y la imagen cobró vida: una familia en un picnic, normal al principio. Pero pronto, figuras sombrías comenzaron a aparecer en el fondo del metraje, observando. Las sombras se movían, acercándose a la familia, que parecía no verlas. De repente, la pantalla se llenó de rostros distorsionados, gritos mudos. Andrés, aterrado, intentó apagar el proyector, pero el botón no respondía. Las imágenes se hicieron cada vez más vívidas, y el calor del proyector comenzó a envolverlo, como si las sombras hubieran cruzado la pantalla y estuvieran ahora con él en la oscuridad."
+            titulo: "MIRA FIJAMENTE TU ESPEJO",
+            sinopsis: "Una mujer compra un espejo antiguo y nota que su reflejo empieza a moverse de forma independiente.",
+            historia: "Una mujer, aficionada a la decoración antigua, compra un espejo de marco oscuro y tallado para su dormitorio. Desde el primer día, siente que su reflejo es ligeramente más lento en reaccionar. Lo ignora como un truco de la luz. Una mañana, se está maquillando y mira fijamente al espejo. Su reflejo parpadea primero, un instante antes de que lo haga ella. Se queda inmóvil. El reflejo, sin embargo, se voltea lentamente y le da la espalda."
         },
         {
-            titulo: "El Silbido de Cumbemayo",
-            sinopsis: "Rafael ignora una advertencia local en Cumbemayo...",
-            historia: "Cumbemayo, Cajamarca, es famoso por sus enigmáticos canales y su ambiente místico. Rafael, un arqueólogo escéptico, desestimó las advertencias de los lugareños sobre no adentrarse solo en la zona al anochecer, especialmente cerca de las cuevas con petroglifos. 'Dicen que el silbido de la Pachamama se lleva a los curiosos', le advirtieron. Rafael se internó al caer la tarde, buscando una formación rocosa en particular. La oscuridad llegó rápido, y con ella, un silbido penetrante y agudo que parecía venir de todas partes y de ninguna. No era el viento, era un sonido consciente, casi musical, pero lleno de una maldad ancestral. El silbido lo atrajo más profundamente entre las rocas, desorientándolo. Sintió una presencia fría a su lado, y aunque no vio nada, el silbido se hizo una voz en su mente, repitiendo su nombre. Nunca encontró la salida esa noche, solo se encontró a sí mismo, girando en círculos, respondiendo al eco de un silbido que prometía guiarlo... a un lugar sin retorno."
+            titulo: "CUIDADO CUANDO TE LLAMEN",
+            sinopsis: "Una niña escucha la voz de su madre llamándola desde abajo, pero su madre está a su lado con una advertencia escalofriante.",
+            historia: "Una noche de tormenta, una niña de unos siete años está sola en su habitación. Escucha la voz de su madre que la llama desde el piso de abajo, con un tono suave y urgente: 'Baja, cariño, ven aquí.' A punto de levantarse de la cama, siente una mano fría y fuerte que la sujeta del brazo. Es su madre, que está de pie junto a su cama, pálida y con los ojos muy abiertos. Susurra, con el aliento helado: 'No bajes. Yo también lo escuché.'"
         },
         {
-            titulo: "El Camino de los Muertos",
-            sinopsis: "Elías se adentra en un tramo evitado de noche...",
-            historia: "En la carretera que une Huancavelica con Ayacucho, hay un tramo viejo y sinuoso que pocos se atreven a tomar de noche. Lo llaman 'El Camino de los Muertos' por las historias de accidentes inexplicables y apariciones. Elías, un camionero joven, decidió tomarlo para ahorrar tiempo, desoyendo las historias. La niebla se levantó densa, envolviendo el camión en un silencio sepulcral. Las luces de sus faros apenas penetraban la oscuridad. Fue entonces cuando los vio: figuras borrosas, como sombras desvanecidas, caminando por el borde de la carretera. No lo miraban, simplemente avanzaban en un silencio inquietante. Al principio pensó que eran alucinaciones por el cansancio, pero la cantidad de figuras aumentó, rodeando su camión, algunas incluso pareciendo pasar a través de él. El frío se hizo insoportable, y el motor empezó a fallar. Elías pisó el acelerador, pero las figuras no se quedaban atrás. De repente, una de ellas se detuvo justo frente a él, un rostro pálido y antiguo con ojos vacíos. Elías cerró los ojos y gritó, el camión patinó... Se despertó al día siguiente, el camión a salvo al costado de la carretera, con la puerta abierta. Pero al mirar el espejo retrovisor, vio por un instante, entre la niebla matutina, las siluetas que seguían caminando, esperándolo."
+            titulo: "TU PASILLO LO CONFIRMA",
+            sinopsis: "Una pareja escucha pasos en su pasillo recién reformado. Un vecino y una extraña evidencia confirman la presencia de un antiguo habitante.",
+            historia: "Una pareja se muda a una casa antigua y la reforman por completo. Todo es moderno y reluciente, con pisos de madera nuevos. La primera noche, despiertan con el sonido de pasos firmes y rítmicos en el pasillo superior, justo encima de su habitación. Asustados, suben a revisar. El pasillo está vacío, y los pasos se han detenido. Esto se repite cada noche. Un anciano vecino les cuenta que el anterior dueño, un militar, se suicidó en ese pasillo. Al terminar la conversación, la pareja nota que, a pesar de que los pisos son nuevos y recién barnizados, solo en el tramo donde se detenían los pasos, la madera está ligeramente desgastada, como por el ir y venir constante."
+        },
+        {
+            titulo: "REVISA TU GALERÍA DE FOTOS",
+            sinopsis: "Un hombre soltero descubre una selfie inquietante de sí mismo durmiendo en su celular.",
+            historia: "Un hombre vive solo en su apartamento. Una tarde, revisando la galería de su celular, encuentra una foto que no recuerda haber tomado. Es una selfie de él mismo durmiendo, en su cama, tomada desde un ángulo bajo y cercano. La foto es perfectamente nítida y muestra su rostro en plena inconsciencia. Él vive solo y nunca duerme con el celular cerca de su cama, sino en el escritorio del otro extremo."
+        },
+        {
+            titulo: "GRABA SIN MIEDO UN MOMENTO",
+            sinopsis: "Un grupo de amigos graba un columpio moviéndose en un parque abandonado y descubre una figura extraña.",
+            historia: "En un viejo parque abandonado, un grupo de amigos se atreve a ir de noche. Se acercan a unos columpios oxidados que se mueven suavemente con el viento. Uno de ellos saca su celular para grabar. En la grabación, se distingue una silueta de niña sentada en el columpio central, meciéndose lentamente. Ninguno de ellos la vio en el momento, y el columpio no se movía con tanta fuerza como para justificar la silueta. Al día siguiente, la policía reporta que la noche anterior, en ese mismo parque, desapareció una niña de la zona que vestía igual."
+        },
+        {
+            titulo: "EL PASAJERO SILENCIOSO",
+            sinopsis: "Un taxista recoge a una mujer misteriosa que lo lleva a una casa abandonada y desaparece.",
+            historia: "En una noche fría y lluviosa, un taxista solitario, Juan, recoge a una mujer vestida elegantemente, pero con un aire de tristeza. Le da una dirección en las afueras, un lugar que a Juan le suena a viejo y abandonado. Durante el trayecto, la mujer no habla, solo observa la lluvia caer. Al llegar a su destino, una mansión ruinosa y oscura, Juan se gira para cobrar, pero el asiento trasero está vacío. Solo queda un tenue olor a azucenas. Mientras se pregunta si se ha vuelto loco, una luz parpadea en el piso superior de la casa, revelando por un instante la silueta de la mujer mirándolo desde la ventana. Juan acelera, dejando atrás el misterio y el eco de una risa infantil."
+        },
+        {
+            titulo: "EL LAMENTO DEL BOSQUE",
+            sinopsis: "Senderistas ignoran las advertencias sobre un bosque encantado y escuchan un lamento que los persigue.",
+            historia: "Un grupo de amigos decide ir de camping a un bosque conocido por sus antiguas leyendas. Los lugareños les advierten sobre 'El Lamento de las Almas Perdidas' que se escucha de noche. Escépticos, montan sus tiendas. A medianoche, un llanto desgarrador, como el de un niño, rompe el silencio. Uno de ellos, valiente, decide investigar con una linterna. El lamento se hace más fuerte, pareciendo moverse entre los árboles, siempre un paso por delante de él. Vuelve aterrorizado, y el grupo decide irse. Mientras empacan, los demás escuchan el llanto no solo del bosque, sino también, débilmente, desde el interior de su propia tienda. La tienda que habían cerrado con cremallera, donde uno de ellos había dejado su mochila."
+        },
+        {
+            titulo: "LA MELODÍA DE LA CAJA MUSICAL",
+            sinopsis: "Una chica encuentra una caja musical antigua que toca sola y atrae a una presencia oscura.",
+            historia: "Sofía hereda de su abuela una pequeña caja musical de madera, con una bailarina polvorienta en su interior. La caja parece rota, pero una noche, Sofía la escucha tocar una melodía espeluznante. Al principio, piensa que ha sido el viento o un animal, pero se repite. Intenta cerrar la tapa, pero esta se resiste. La música suena más fuerte y una sombra oscura comienza a formarse en su habitación, moviéndose al ritmo de la melodía. La bailarina dentro de la caja empieza a girar más rápido, sus ojos pintados parecen seguir a Sofía. El aire se vuelve frío, y la sombra se acerca a la cama. Sofía grita, y la caja musical se detiene de golpe, la bailarina quieta y mirando hacia ella, pero la sombra ya no está en la habitación. Siente algo frío sobre su pie, y al mirar, ve las puntas de los dedos de una mano oscura aferrándose al borde de su manta."
         }
     ];
 
     function obtenerHistoriasParaMostrar() {
-        const historiasAleatorias = [];
-        const indicesUsados = new Set();
-        while (historiasAleatorias.length < 3 && historiasAleatorias.length < historiasBase.length) {
-            const randomIndex = Math.floor(Math.random() * historiasBase.length);
-            if (!indicesUsados.has(randomIndex)) {
-                historiasAleatorias.push(historiasBase[randomIndex]);
-                indicesUsados.add(randomIndex);
-            }
-        }
-        return historiasAleatorias;
+        // Devuelve una copia de todo el array de historiasBase para mostrarlas todas.
+        return [...historiasBase];
     }
 
     function mostrarHistorias() {
@@ -193,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function mostrarContenidoHistoria(historia) {
         menuHistorias.classList.add('oculto');
-        apoyanosSection.classList.add('oculto'); // Ocultar Apóyanos en la historia
+        document.getElementById('apoyanos').classList.add('oculto'); // Ocultar Apóyanos en la historia
         contenidoHistoria.classList.remove('oculto');
         tituloHistoria.textContent = historia.titulo;
         textoHistoria.innerHTML = historia.historia.replace(/\n/g, '<br><br>');
@@ -201,8 +202,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function volverAlMenu() {
-        showSection('menu-historias'); // Usa showSection para gestionar la visibilidad de Apóyanos
-        mostrarHistorias(); // Recargar las historias
+        menuHistorias.classList.remove('oculto');
+        document.getElementById('apoyanos').classList.remove('oculto'); // Mostrar Apóyanos al volver
+        contenidoHistoria.classList.add('oculto');
         if (synthesis.speaking) synthesis.cancel();
         restoreBackgroundMusicVolume();
     }
@@ -492,22 +494,8 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarQrPlinBtn.addEventListener('click', abrirModalQR);
     toggleMusicBtn.addEventListener('click', toggleBackgroundMusic);
 
-    // --- Lógica para la portada inicial ---
-    function enterSite() {
-        portadaInicialSection.classList.add('oculto'); // Oculta la portada
-        header.classList.remove('oculto'); // Muestra el encabezado
-        footer.classList.remove('oculto'); // Muestra el pie de página
-        musicControl.classList.remove('oculto'); // Muestra el control de música
-        showSection('menu-historias'); // Muestra la sección de historias por defecto
-        mostrarHistorias(); // Carga las tarjetas de historias
-        playBackgroundMusic(); // Inicia la música de fondo al entrar
-    }
-
-    // Event listener para el botón "Entrar" de la portada
-    enterSiteBtn.addEventListener('click', enterSite);
-
-    // No llamar a showSection('menu-historias') al inicio, la portada es la inicial
-    // showSection('menu-historias'); // Comentado porque la portada es la sección inicial
-    // mostrarHistorias(); // Comentado, se llama en enterSite()
-    // playBackgroundMusic(); // Comentado, se llama en enterSite()
+    // --- Inicialización ---
+    showSection('menu-historias'); // Asegúrate de que esta es la sección inicial
+    mostrarHistorias(); // Carga las tarjetas de historias al inicio
+    playBackgroundMusic(); // Inicia la música de fondo
 });
