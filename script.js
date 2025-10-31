@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const navButtons = document.querySelectorAll('.nav-button');
     const volverGeneralButtons = document.querySelectorAll('.volver-general');
 
+    const portadaInicial = document.getElementById('portada-inicial');
+    const enterSiteBtn = document.getElementById('enter-site-btn');
+    const header = document.querySelector('header');
+    const footer = document.querySelector('footer');
+    const musicControl = document.getElementById('music-control'); // Agregado
+
     const menuHistorias = document.getElementById('menu-historias');
     const historiasGrid = document.querySelector('.historias-grid');
     const contenidoHistoria = document.getElementById('contenido-historia');
@@ -16,46 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const backgroundMusic = document.getElementById('background-music');
     const toggleMusicBtn = document.getElementById('toggle-music');
-    const toggleMusicIcon = toggleMusicBtn ? toggleMusicBtn.querySelector('i') : null;
+    const toggleMusicIcon = toggleMusicBtn.querySelector('i');
     const cardClickSound = document.getElementById('card-click-sound');
-    const enterSiteBtn = document.getElementById('enter-site-btn');
-    const portadaInicial = document.getElementById('portada-inicial');
-    const header = document.querySelector('header');
-    const footer = document.querySelector('footer');
-    const musicControl = document.getElementById('music-control');
-
-    if (enterSiteBtn) {
-        enterSiteBtn.addEventListener('click', () => {
-        // Ocultar portada y mostrar header/footer/controls
-        if (portadaInicial) portadaInicial.classList.add('oculto');
-        if (header) header.classList.remove('oculto');
-        if (footer) footer.classList.remove('oculto');
-        if (musicControl) musicControl.classList.remove('oculto');
-
-        // Mostrar la sección principal (menu-historias)
-        if (typeof showSection === 'function') {
-            showSection('menu-historias');
-        } else {
-            // fallback: manipulación directa si showSection aún no está definida
-            const menu = document.getElementById('menu-historias');
-            if (menu) {
-                document.querySelectorAll('main section').forEach(s => s.classList.add('oculto'));
-                menu.classList.remove('oculto');
-        // Iniciar música (si existe) y cargar historias
-        try {
-            if (typeof playBackgroundMusic === 'function') {
-                playBackgroundMusic();
-            } else if (backgroundMusic) {
-                backgroundMusic.volume = 0.2;
-                backgroundMusic.play().catch(()=>{/*ignore*/});
-            }
-            if (typeof mostrarHistorias === 'function') mostrarHistorias();
-        } catch (e) {
-            console.warn("Error al intentar iniciar música o cargar historias:", e);
-        }
-    });
-} else {
-    console.warn("Botón ENTRAR no encontrado en el DOM (id='enter-site-btn').");
 
     // Carta Astral
     const cartaAstralSection = document.getElementById('carta-astral-section');
@@ -79,6 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMusicPlaying = false;
     const BGM_VOLUME = 0.2;
     const BGM_VOLUME_QUIET = 0.05;
+
+    // --- Manejador para el botón ENTRAR ---
+    enterSiteBtn.addEventListener('click', () => {
+        portadaInicial.classList.add('oculto');
+        header.classList.remove('oculto');
+        footer.classList.remove('oculto');
+        musicControl.classList.remove('oculto'); // Mostrar control de música
+        showSection('menu-historias'); // Mostrar la sección de historias por defecto
+        playBackgroundMusic(); // Iniciar la música de fondo al entrar
+    });
 
     // --- Navegación General ---
     function showSection(targetId) {
@@ -462,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "¿Con quién del grupo tendrías una cita de una noche?",
         "¿Qué parte de tu cuerpo te gusta más?",
         "¿Cuál ha sido tu peor beso?",
-        "¿A quién le confesarías algo esta noche si tuvieras que hacerlo?"
+        "¿A quién le confesarías algo esta noche si tuvieras que hacerlo?",
         "¿Has tenido pensamientos subidos de tono con alguien aquí?",
         "¿Cuál fue tu primera experiencia sexual?",
         "¿Te han atrapado haciendo algo indebido?",
@@ -493,8 +471,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "Di una frase de amor mirando a alguien del grupo.",
         "Baila sin música durante 30 segundos.",
         "Deja que alguien revise tus emojis recientes.",
-        "Léele un mensaje antiguo a alguien del grupo."
-          "Envía un emoji 🔥 a tu contacto más reciente.",
+        "Léele un mensaje antiguo a alguien del grupo.",
+        "Envía un emoji 🔥 a tu contacto más reciente.",
         "Dale un beso en la mejilla a la persona que el grupo elija.",
         "Deja que alguien escriba una frase coqueta en tu estado.",
         "Mira fijamente a alguien durante 20 segundos sin reírte.",
@@ -574,9 +552,5 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarQrPlinBtn.addEventListener('click', abrirModalQR);
     toggleMusicBtn.addEventListener('click', toggleBackgroundMusic);
 
-    // --- Inicialización ---
-    showSection('menu-historias'); // Asegúrate de que esta es la sección inicial
-    mostrarHistorias(); // Carga las tarjetas de historias al inicio
-    playBackgroundMusic(); // Inicia la música de fondo
+    // No llamar a showSection o playBackgroundMusic aquí, se hará desde el botón 'enter-site-btn'
 });
-
