@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disfruta Halloween</title> <!-- Título de la web actualizado -->
+    <title>Disfruta Halloween</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,19 +11,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div id="particles-js"></div> <!-- Contenedor para partículas -->
+    <div id="particles-js"></div>
 
-    <!-- Archivos de Audio: Asegúrate de que estos nombres coincidan con tus archivos -->
     <audio id="background-music" loop src="creepy-background-music.mp3"></audio>
     <audio id="card-click-sound" src="whoosh.mp3"></audio>
     <audio id="qr-open-sound" src="chime.mp3"></audio>
 
-    <div id="music-control">
+    <div id="music-control" class="oculto"> <!-- Oculto por defecto -->
         <button id="toggle-music" title="Música ON/OFF"><i class="fas fa-volume-up"></i></button>
     </div>
 
-    <header>
-        <h1>DISFRUTA HALLOWEEN</h1> <!-- Título principal actualizado -->
+    <!-- Sección de Portada Inicial -->
+    <section id="portada-inicial" class="current-section">
+        <img src="horror-portada.jpeg" alt="Bienvenida de Halloween" class="portada-imagen">
+        <div class="portada-overlay">
+            <h1>BIENVENIDO A LAS NOCHES DE TERROR</h1>
+            <button id="enter-site-btn" class="portada-button">ENTRAR</button>
+        </div>
+    </section>
+
+    <header class="oculto"> <!-- Oculto por defecto -->
+        <h1>DISFRUTA HALLOWEEN</h1>
         <nav>
             <button class="nav-button" data-target="menu-historias">Historias de Halloween</button>
             <button class="nav-button" data-target="carta-astral-section">Carta Astral</button>
@@ -32,12 +40,11 @@
     </header>
 
     <main>
-        <section id="menu-historias" class="current-section"> <!-- Marcamos esta como la sección inicial -->
+        <section id="menu-historias" class="oculto"> <!-- Ahora oculto por defecto -->
             <h2>Elige tu Pesadilla...</h2>
             <div class="historias-grid">
                 <!-- Las tarjetas de historia generadas por JS se insertarán aquí -->
             </div>
-            <!-- Botón "Generar Nuevas Historias" ha sido eliminado -->
         </section>
 
         <section id="carta-astral-section" class="oculto">
@@ -72,14 +79,13 @@
         <section id="contenido-historia" class="oculto">
             <h2 id="titulo-historia"></h2>
             <p id="texto-historia"></p>
-            <!-- Botones de control de historia y regresar al menú -->
             <div class="story-controls">
                 <button id="volver-menu"><i class="fas fa-arrow-left"></i> Volver al Menú</button>
                 <button id="toggle-speech"><i class="fas fa-play"></i> Leer Historia</button>
             </div>
         </section>
 
-        <section id="apoyanos">
+        <section id="apoyanos" class="oculto"> <!-- Oculto por defecto, se mostrará con las secciones de contenido -->
             <h2>¿Te gustaron las historias?</h2>
             <p>Considera apoyar el miedo con un café o una donación.</p>
             <div class="apoyo-buttons">
@@ -89,16 +95,11 @@
         </section>
     </main>
 
-    <footer>
+    <footer class="oculto"> <!-- Oculto por defecto -->
         <p>&copy; 2023 Noches de Terror</p>
     </footer>
 
-    <!-- Scripts externos -->
     <script src="particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
